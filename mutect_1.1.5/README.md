@@ -1,95 +1,39 @@
-# CWL and Dockerfile for running Trim Galore
-
-## Version of tools in docker image (/container/Dockerfile)
-
-| Tool	| Version	| Location	|
-|---	|---	|---	|
-| Ubuntu base image  	| 18.04  	|   -	|
-| cutadapt  	| 2.3  	|  https://pypi.org/project/cutadapt/	|
-| FASTQC  	| 0.11.8	|  https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.11.8.zip	|
-| Trim Galore  	| 0.6.2	| https://github.com/FelixKrueger/TrimGalore/archive/0.6.2.tar.gz	|
-
-## CWL
-
-- CWL specification 1.0
-- Use example_inputs.yaml to see the inputs to the cwl
-- Example Command using [toil](https://toil.readthedocs.io):
-
-```bash
-    > toil-cwl-runner trim_galore_0.6.2.cwl example_inputs.yaml
-```
-
-**If at MSK, using the JUNO cluster having installed toil version 3.19 and manually modifying [lsf.py](https://github.com/DataBiosphere/toil/blob/releases/3.19.0/src/toil/batchSystems/lsf.py#L170) by removing `type==X86_64 &&` you can use the following command**
-
-```bash
-#Using CWLTOOL
-> cwltool --singularity --non-strict /path/to/trim_galore_0.6.2.cwl /path/to/inputs.yaml
-
-#Using toil-cwl-runner
-> mkdir trimgalore_toil_log
-> toil-cwl-runner --singularity --logFile /path/to/trimgalore_toil_log/cwltoil.log  --jobStore /path/to/trimgalore_jobStore --batchSystem lsf --workDir /path/to/trimgalore_toil_log --outdir . --writeLogs /path/to/trimgalore_toil_log --logLevel DEBUG --stats --retryCount 2 --disableCaching --maxLogFileSize 20000000000 /path/to/trim_galore_0.6.2.cwl /path/to/inputs.yaml > trimgalore_toil.stdout 2> trimgalore_toil.stderr &
-```
-
-### Usage
-
-```
-usage: trim_galore_0.6.2.cwl [-h]
-
-positional arguments:
-  job_order             Job input json file
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --memory_per_job MEMORY_PER_JOB
-                        Memory per job in megabytes
-  --memory_overhead MEMORY_OVERHEAD
-                        Memory overhead per job in megabytes
-  --number_of_threads NUMBER_OF_THREADS
-  --path_to_trim_galore PATH_TO_TRIM_GALORE
-                        Path to trim_galore executable file
-  --adapter ADAPTER     Adapter sequence to be trimmed. If not specified
-                        explicitely, the first 13bp of the Illumina adapter
-                        'AGATCGGAAGAGC' will be used by default.
-  --adapter2 ADAPTER2   Optional adapter sequence to be trimmed off read 2 of
-                        paired-end files. This option requires '--paired' to
-                        be specified as well
-  --fastq1 FASTQ1       READ1 of the paired-end run
-  --fastq2 FASTQ2       READ2 of the pair-end run
-  --length LENGTH       Discard reads that became shorter than length INT
-                        because of either quality or adapter trimming. A value
-                        of '0' effectively disables this behaviour. Default:
-                        20 bp.
-  --paired              This option performs length trimming of
-                        quality/adapter/RRBS trimmed reads for paired-end
-                        files. To pass the validation test, both sequences of
-                        a sequence pair are required to have a certain minimum
-                        length which is governed by the option --length (see
-                        above). If only one read passes this length threshold
-                        the other read can be rescued (see option
-                        --retain_unpaired). Using this option lets you discard
-                        too short read pairs without disturbing the sequence-
-                        by-sequence order of FastQ files which is required by
-                        many aligners.
-  --gzip                Compress the output file with gzip. If the input files
-                        are gzip-compressed the output files will be
-                        automatically gzip compressed as well.
-  --quality QUALITY     Trim low-quality ends from reads in addition to
-                        adapter removal. For RRBS samples, quality trimming
-                        will be performed first, and adapter trimming is
-                        carried in a second round. Other files are quality and
-                        adapter trimmed in a single pass. The algorithm is the
-                        same as the one used by BWA (Subtract INT from all
-                        qualities; compute partial sums from all indices to
-                        the end of the sequence; cut sequence at the index at
-                        which the sum is minimal). Default Phred score: 20.
-  --stringency STRINGENCY
-                        "Overlap with adapter sequence required to trim a
-                        sequence. Defaults to a very stringent setting of '1',
-                        i.e. even a single bp of overlapping sequence will be
-                        trimmed of the 3' end of any read."
-  --suppress_warn       If specified any output to STDOUT or STDERR will be
-                        suppressed.
-  --error_rate ERROR_RATE
-                        Maximum allowed error rate (no. of errors divided by
-                        the length of the matching region) (default: 0.1)
-```
+/dmp/resources/prod/tools/system/java/java-1.7.0-openjdk-1.7.0.9.x86_64/jre/bin/java \
+-Xmx28g \
+-Xms256m \
+-XX:-UseGCOverheadLimit \
+-jar \
+/home/jayakumg/software/ACCESS_tools/muTect-1.1.5.jar \
+--analysis_type \
+ MuTect \
+--cosmic \
+/home/jayakumg/data/ACCESS-data/resources/variant_calling/CosmicCodingMuts_v67_b37_20131024__NDS.vcf \
+--dbsnp \
+/home/jayakumg/data/ACCESS-data/dbsnp_137.b37.vcf \
+--downsample_to_coverage \
+50000 \
+--downsampling_type \
+NONE \
+--enable_extended_output \
+--fraction_contamination \
+0.0005 \
+--input_file:normal \
+/dmp/hot/jayakumg/projects/MSK-ACCESS/processed-data/NOVA-ACCESSv1-VAL-20180007/duplex_bams/F22_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.bam \
+--input_file:tumor \
+/dmp/hot/jayakumg/projects/MSK-ACCESS/analysis/ACCESSv1-CLIN-20190003/processed-data/duplex/12345678-TP01rpt_ACCESSv1-CLIN-20190003_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.bam \
+--intervals \
+/home/jayakumg/data/ACCESS-data/resources/variant_calling/MSK-ACCESS-v1_0panelA_canonicaltargets_500buffer.bed \
+--minimum_mutation_cell_fraction \
+0.0005 \
+--normal_sample_name \
+F22 \
+--out \
+12345678-TP01rpt.F22.mutect.txt \
+--read_filter \
+BadCigar \
+--reference_sequence \
+/dmp/data/pubdata/hg-fasta/VERSIONS/hg19/Homo_sapiens_assembly19.fasta \
+--tumor_sample_name \
+12345678-TP01rpt \
+--vcf \
+12345678-TP01rpt.F22.mutect.vcf
