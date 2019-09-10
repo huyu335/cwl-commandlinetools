@@ -1,16 +1,29 @@
-adapter: GATCGGAAGAGC
-adapter2: AGATCGGAAGAGC
-fastq1:
+input_file_normal:
   class: File
-  path: "/path/to/R1_fastq.gz"
-fastq2:
+  path: "/path/to/normal.bam.file"
+input_file_tumor:
   class: File
-  path: "/path/to/R2_fastq.gz"
-gzip: true
-length: 25
-memory_overhead: 10
-memory_per_job: 100
-number_of_threads: 2
-paired: true
-quality: 1
-stringency: 3
+  path: "/path/to/tumor.bam.file"
+normal_sample_name: F22
+tumor_sample_name: 12345678-T
+
+read_filter: BadCigar
+downsample_to_coverage: 50000
+fraction_contamination: 0.0005
+minimum_mutation_cell_fraction: 0.0005
+
+cosmic:
+  class: File
+  path: /Users/huy1/project/cwl-cmd-test-data/CosmicCodingMuts_v67_b37_20131024__NDS.vcf
+dbsnp: 
+  class: File
+  path: /Users/huy1/project/cwl-cmd-test-data/dbsnp_137.b37.vcf
+intervals:
+  class: File
+  path: /Users/huy1/project/cwl-cmd-test-data/MSK-ACCESS-v1_0panelA_canonicaltargets_500buffer.bed
+reference_sequence:
+  class: File
+  path: /Users/huy1/project/cwl-cmd-test-data/Homo_sapiens_assembly19.fasta
+
+out: 12345678-T.F22.mutect.txt
+vcf: 12345678-T.F22.mutect.vcf
