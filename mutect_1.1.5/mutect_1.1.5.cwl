@@ -21,7 +21,7 @@ arguments:
   - MuTect
 
 requirements:
-  ResourceRequirement
+  ResourceRequirement:
     ramMin: 32000
     coresMin: 1
     outdirMax: 20000
@@ -284,7 +284,7 @@ inputs:
       prefix: --initial_tumor_lod
     doc: Initial LOD threshold for calling tumor variant
 
-   input_file_normal:
+  input_file_normal:
     type: File?
     inputBinding:
       position: 0
@@ -292,7 +292,7 @@ inputs:
     doc: SAM or BAM file(s)
     secondaryFiles: [^.bai]
 
-   input_file_tumor:
+  input_file_tumor:
     type: File?
     inputBinding:
       position: 0
@@ -300,7 +300,7 @@ inputs:
     doc: SAM or BAM file(s)
     secondaryFiles: [^.bai]
 
-   interval_merging:
+  interval_merging:
     type: string[]?
     inputBinding:
       position: 0
@@ -309,7 +309,7 @@ inputs:
       Indicates the interval merging rule we should use for abutting intervals
       (ALL| OVERLAPPING_ONLY)
 
-   interval_padding:
+  interval_padding:
     type: string[]?
     inputBinding:
       position: 0
@@ -318,7 +318,7 @@ inputs:
       Indicates how many basepairs of padding to include around each of the
       intervals specified with the -L/
 
-   interval_set_rule:
+  interval_set_rule:
     type: string[]?
     inputBinding:
       position: 0
@@ -327,7 +327,7 @@ inputs:
       Indicates the set merging approach the interval parser should use to
       combine the various -L or -XL inputs (UNION| INTERSECTION)
 
-   intervals:
+  intervals:
     type:
       - string
       - File
@@ -349,14 +349,14 @@ inputs:
       Should we override the Walkers default and keep program records from the
       SAM header
 
-   log_to_file:
+  log_to_file:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --log_to_file
     doc: Set the logging location
 
-   logging_level:
+  logging_level:
     type: string[]?
     inputBinding:
       position: 0
@@ -365,7 +365,7 @@ inputs:
       Set the minimum level of logging, i.e. setting INFO gets you INFO up to
       FATAL, setting ERROR gets you ERROR and FATAL level logging.
 
-   maxRuntime:
+  maxRuntime:
     type: string[]?
     inputBinding:
       position: 0
@@ -376,7 +376,7 @@ inputs:
       failure. By default the value is interpreted in minutes, but this can be
       changed by maxRuntimeUnits
 
-   maxRuntimeUnits:
+  maxRuntimeUnits:
     type: string[]?
     inputBinding:
       position: 0
@@ -385,35 +385,35 @@ inputs:
       The TimeUnit for maxRuntime (NANOSECONDS|
       MICROSECONDS|MILLISECONDS|SECONDS|MINUTES| HOURS|DAYS)
 
-   max_alt_allele_in_normal_fraction:
+  max_alt_allele_in_normal_fraction:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --max_alt_allele_in_normal_fraction
     doc: threshold for maximum alternate allele fraction in normal
 
-   max_alt_alleles_in_normal_count:
+  max_alt_alleles_in_normal_count:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --max_alt_alleles_in_normal_count
     doc: threshold for maximum alternate allele counts in normal
 
-   max_alt_alleles_in_normal_qscore_sum:
+  max_alt_alleles_in_normal_qscore_sum:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --max_alt_alleles_in_normal_qscore_sum
     doc: threshold for maximum alternate allele quality score sum in normal
 
-   min_qscore:
+  min_qscore:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --min_qscore
     doc: threshold for minimum base quality score
 
-   minimum_mutation_cell_fraction:
+  minimum_mutation_cell_fraction:
     type: float?
     inputBinding:
       position: 0
@@ -422,7 +422,7 @@ inputs:
       minimum fraction of cells which are presumed to have a mutation, used to
       handle non-clonality and contamination
 
-   minimum_normal_allele_fraction:
+  minimum_normal_allele_fraction:
     type: string[]?
     inputBinding:
       position: 0
@@ -457,35 +457,35 @@ inputs:
       prefix: --noop
     doc: used for debugging, basically exit as soon as we get the reads
 
-   normal_depth_file:
+  normal_depth_file:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --normal_depth_file
     doc: write out normal read depth in WIGGLE format to this file
 
-   normal_lod:
+  normal_lod:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --normal_lod
     doc: LOD threshold for calling normal non-germline
 
-   normal_sample_name:
+  normal_sample_name:
     type: string
     inputBinding:
       position: 0
       prefix: --normal_sample_name
     doc: name to use for normal in output files
 
-   num_bam_file_handles:
+  num_bam_file_handles:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --num_bam_file_handles
     doc: The total number of BAM file handles to keep open simultaneously
 
-   num_cpu_threads_per_data_thread:
+  num_cpu_threads_per_data_thread:
     type: string?
     inputBinding:
       position: 0
@@ -494,7 +494,7 @@ inputs:
       How many CPU threads should be allocated per data thread to running this
       analysis?
 
-   num_threads:
+  num_threads:
     type: string?
     inputBinding:
       position: 0
@@ -509,7 +509,7 @@ inputs:
       prefix: --only_passing_calls
     doc: only emit passing calls
 
-   out:
+  out:
     type:
       - 'null'
       - string
@@ -519,21 +519,21 @@ inputs:
       prefix: --out
     doc: Call-stats output
 
-   pedigree:
+  pedigree:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --pedigree
     doc: Pedigree files for samples
 
-   pedigreeString:
+  pedigreeString:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --pedigreeString
     doc: Pedigree string for samples
 
-   pedigreeValidationType:
+  pedigreeValidationType:
     type: string[]?
     inputBinding:
       position: 0
@@ -542,14 +542,14 @@ inputs:
       How strict should we be in validating the pedigree information?
       (STRICT|SILENT)
 
-   performanceLog:
+  performanceLog:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --performanceLog
     doc: If provided, a GATK runtime performance log will be written to this file
 
-   phone_home:
+  phone_home:
     type: string[]?
     inputBinding:
       position: 0
@@ -560,42 +560,42 @@ inputs:
       -phone-home-and-how-does-it-affect-me#latest for details.
       (NO_ET|STANDARD|STDOUT)
 
-   pir_mad_threshold:
+  pir_mad_threshold:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --pir_mad_threshold
     doc: threshold for clustered read position artifact MAD
 
-   pir_median_threshold:
+  pir_median_threshold:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --pir_median_threshold
     doc: threshold for clustered read position artifact median
 
-   power_constant_af:
+  power_constant_af:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --power_constant_af
     doc: Allelic fraction constant to use in power calculations
 
-   power_constant_qscore:
+  power_constant_qscore:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --power_constant_qscore
     doc: Phred scale quality score constant to use in power calculations
 
-   power_file:
+  power_file:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --power_file
     doc: write out power in WIGGLE format to this file
 
-   preserve_qscores_less_than:
+  preserve_qscores_less_than:
     type: string[]?
     inputBinding:
       position: 0
@@ -604,21 +604,21 @@ inputs:
       Bases with quality scores less than this threshold wont be recalibrated
       (with -BQSR)
 
-   read_buffer_size:
+  read_buffer_size:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --read_buffer_size
     doc: Number of reads per SAM file to buffer in memory
 
-   read_filter:
+  read_filter:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --read_filter
     doc: Specify filtration criteria to apply to each read individually
 
-   read_group_black_list:
+  read_group_black_list:
     type: string[]?
     inputBinding:
       position: 0
@@ -627,7 +627,7 @@ inputs:
       Filters out read groups matching <TAG> -<STRING> or a .txt file containing
       the filter strings one per line.
 
-   reference_sequence:
+  reference_sequence:
     type: File
     inputBinding:
       position: 0
@@ -665,7 +665,7 @@ inputs:
       <somatic_classification_normal_power_threshold> determine germline vs
       variant
 
-   tag:
+  tag:
     type: string[]?
     inputBinding:
       position: 0
@@ -674,14 +674,14 @@ inputs:
       Arbitrary tag string to identify this GATK run as part of a group of runs,
       for later analysis
 
-   tumor_depth_file:
+  tumor_depth_file:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --tumor_depth_file
     doc: write out tumor read depth in WIGGLE format to this file
 
-   tumor_f_pretest:
+  tumor_f_pretest:
     type: string[]?
     inputBinding:
       position: 0
@@ -690,21 +690,21 @@ inputs:
       for computational efficiency, reject sites with allelic fraction below
       this threshold
 
-   tumor_lod:
+  tumor_lod:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --tumor_lod
     doc: LOD threshold for calling tumor variant
 
-   tumor_sample_name:
+  tumor_sample_name:
     type: string
     inputBinding:
       position: 0
       prefix: --tumor_sample_name
     doc: name to use for tumor in output files
 
-   unsafe:
+  unsafe:
     type: string[]?
     inputBinding:
       position: 0
@@ -726,14 +726,14 @@ inputs:
       If set, use the original base quality scores from the OQ tag when present
       instead of the standard scores
 
-   validation_strictness:
+  validation_strictness:
     type: string[]?
     inputBinding:
       position: 0
       prefix: --validation_strictness
     doc: How strict should we be with validation (STRICT|LENIENT|SILENT)
 
-   vcf:
+  vcf:
     type: string?
     inputBinding:
       position: 0
@@ -742,7 +742,7 @@ inputs:
 
 
 outputs:
-   callstats_output:
+  callstats_output:
     type: File?
     outputBinding:
       glob: |
@@ -752,7 +752,7 @@ outputs:
           return null;
         }
 
-   output:
+  output:
     type: File?
     outputBinding:
       glob: |
