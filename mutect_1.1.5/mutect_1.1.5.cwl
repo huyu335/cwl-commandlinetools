@@ -612,7 +612,7 @@ inputs:
     doc: Number of reads per SAM file to buffer in memory
 
   read_filter:
-    type: string[]?
+    type: string?
     inputBinding:
       position: 0
       prefix: --read_filter
@@ -632,6 +632,7 @@ inputs:
     inputBinding:
       position: 0
       prefix: --reference_sequence
+    secondaryFiles: [.fai, ^.dict]
 
   remove_program_records:
     type: boolean?

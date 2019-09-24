@@ -30,9 +30,5 @@ vcf: 12345678-T.F22.mutect.vcf
 
 tmp_dir: /dmp/analysis/SCRATCH
 
-java_7:
-  class: String
-  path: /dmp/resources/prod/tools/system/java/java-1.7.0-openjdk-1.7.0.9.x86_64/jre/bin/java
-mutect:
-  class: String
-  path: /home/jayakumg/software/ACCESS_tools/muTect-1.1.5.jar
+java_7: "/dmp/resources/prod/tools/system/java/java-1.7.0-openjdk-1.7.0.9.x86_64/jre/bin/java"
+mutect: "/home/jayakumg/software/ACCESS_tools/muTect-1.1.5.jar"
