@@ -1,9 +1,9 @@
 input_file_normal:
   class: File
-  path: /dmp/hot/huy1/test_files/F22_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.bam
+  path: /work/dmp/huy1/test_data/F22_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.bam
 input_file_tumor:
   class: File
-  path: /dmp/hot/huy1/test_files/12345678-TP01rpt_ACCESSv1-CLIN-20190003_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.bam
+  path: /work/dmp/huy1/test_data/12345678-TP01_ACCESSv1-CLIN-20190003_cl_aln_srt_MD_IR_FX_BR__aln_srt_IR_FX-duplex.bam
 normal_sample_name: F22
 tumor_sample_name: 12345678-T
 
@@ -14,21 +14,22 @@ minimum_mutation_cell_fraction: 0.0005
 
 cosmic:
   class: File
-  path: /home/jayakumg/data/ACCESS-data/resources/variant_calling/CosmicCodingMuts_v67_b37_20131024__NDS.vcf
+  path: /work/dmp/huy1/test_data/CosmicCodingMuts_v67_b37_20131024__NDS.vcf
 dbsnp: 
   class: File
-  path: /home/jayakumg/data/ACCESS-data/dbsnp_137.b37.vcf
+  path: /work/dmp/huy1/test_data/dbsnp_137.b37.vcf
 intervals:
   class: File
-  path: /home/jayakumg/data/ACCESS-data/resources/variant_calling/MSK-ACCESS-v1_0panelA_canonicaltargets_500buffer.bed
+  path: /work/dmp/huy1/test_data/MSK-ACCESS-v1_0panelA_canonicaltargets_500buffer.bed
 reference_sequence:
   class: File
-  path: /dmp/data/pubdata/hg-fasta/VERSIONS/hg19/Homo_sapiens_assembly19.fasta
+  path: /work/dmp/huy1/hg19/Homo_sapiens_assembly19.fasta
 
 out: 12345678-T.F22.mutect.txt
 vcf: 12345678-T.F22.mutect.vcf
 
-tmp_dir: /dmp/analysis/SCRATCH
+tmp_dir: /work/dmp/huy1/SCRATCH
 
-java_7: "/dmp/resources/prod/tools/system/java/java-1.7.0-openjdk-1.7.0.9.x86_64/jre/bin/java"
-mutect: "/home/jayakumg/software/ACCESS_tools/muTect-1.1.5.jar"
+#java_7: "/dmp/resources/prod/tools/system/java/java-1.7.0-openjdk-1.7.0.9.x86_64/jre/bin/java"
+java_7: "/usr/bin/java"
+mutect: "/work/dmp/huy1/test_data/muTect-1.1.5.jar"
