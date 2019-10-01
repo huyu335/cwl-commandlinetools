@@ -41,3 +41,6 @@ BadCigar \
 
 
 toil-cwl-runner --singularity --logFile /work/dmp/huy1/mutect/cwltoil.log  --jobStore /work/dmp/huy1/mutect/log --batchSystem lsf --workDir /work/dmp/huy1/mutect/tmp --outdir /work/dmp/huy1/mutect --writeLogs /work/dmp/huy1/mutect/log --logLevel DEBUG --stats --retryCount 2 --disableCaching --maxLogFileSize 20000000000 /home/huy1/project/cwl-commandlinetools/mutect_1.1.5/mutect_1.1.5.cwl /home/huy1/project/cwl-commandlinetools/mutect_1.1.5/example_inputs.yaml > /work/dmp/huy1/mutect/mutect.stdout 2> /work/dmp/huy1/mutect/mutect.stderr &
+
+module load singularity/3.3.0
+module avail singularity
